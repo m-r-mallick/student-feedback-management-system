@@ -6,20 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5452ebc0-2abb-4b60-af7d-15c62c86172c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Controller/HomeSceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Controller/HomeSceneController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Misc/Helpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Misc/Helpers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Repository/CoursesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Repository/CoursesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Repository/DepartmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Repository/DepartmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Repository/TeacherRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentfeedbackmanagementsystem/Repository/TeacherRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/studentfeedbackmanagementsystem/homeScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/studentfeedbackmanagementsystem/homeScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Controller/FeedbackSceneController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Controller/FeedbackSceneController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Controller/HomeSceneController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Controller/HomeSceneController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Misc/Helpers.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Misc/Helpers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Repository/CoursesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Repository/CoursesRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Repository/DepartmentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Repository/DepartmentRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Repository/TeacherRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/Repository/TeacherRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/feedbackScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/feedbackScene.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/homeScene.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/studentfeedbackmanagementsystem/homeScene.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +30,14 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="9c5aadd5-d742-4a2d-a3af-2a1ebeee66ec" />
+        <option name="url" value="https://github.com/m-r-mallick/student-feedback-management-system.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectId" id="1zQZpEGsQJkxrDoXxNexoKllNGm" />
   <component name="ProjectViewState">
