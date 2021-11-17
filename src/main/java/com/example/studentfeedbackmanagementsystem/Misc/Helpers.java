@@ -1,5 +1,7 @@
 package com.example.studentfeedbackmanagementsystem.Misc;
 
+import com.example.studentfeedbackmanagementsystem.DAO.CourseTeachers;
+import com.example.studentfeedbackmanagementsystem.DAO.DepartmentCourses;
 import com.example.studentfeedbackmanagementsystem.DAO.StudentCourseRating;
 import com.example.studentfeedbackmanagementsystem.Entity.Course;
 import com.example.studentfeedbackmanagementsystem.Entity.Department;
@@ -38,6 +40,14 @@ public class Helpers {
 
     public static String formattedDepartment(Department department) {
         return "Id : " + department.getDepttId() + "\n" + "Name : " + department.getDepttName() + "\n";
+    }
+
+    public static String formattedCT(CourseTeachers courseTeacher) {
+        return "Course Id : " + courseTeacher.getCourseId() + "\n" + "Course Name : " + courseTeacher.getCourseName() + "\n" + "Teacher Id : " + courseTeacher.getCourseTeacherId() + "\n" + "Teacher Name : " + courseTeacher.getCourseTeacherName() + "\n";
+    }
+
+    public static String formattedDC(DepartmentCourses departmentCourse) {
+        return "Course Id : " + departmentCourse.getCourseId() + "\n" + "Course Name : " + departmentCourse.getCourseName() + "\n" + "Deptt. Id : " + departmentCourse.getDepttId() + "\n" + "Department : " + departmentCourse.getDepttName() + "\n" + "Semester : " + departmentCourse.getSemester() + "\n";
     }
 }
 

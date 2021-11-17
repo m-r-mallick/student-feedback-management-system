@@ -1,10 +1,13 @@
 package com.example.studentfeedbackmanagementsystem.Repository;
 
+import com.example.studentfeedbackmanagementsystem.DAO.DepartmentCourses;
 import com.example.studentfeedbackmanagementsystem.Entity.Course;
 import com.example.studentfeedbackmanagementsystem.Entity.Department;
 import com.example.studentfeedbackmanagementsystem.Entity.Teacher;
 import com.example.studentfeedbackmanagementsystem.Misc.Auth;
 import com.example.studentfeedbackmanagementsystem.Misc.SQLQueries;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
@@ -115,5 +118,17 @@ public class DepartmentRepository {
             }
         }
         return null;
+    }
+
+    public ObservableList<DepartmentCourses> getAllDepttCourses() throws SQLException {
+        ObservableList<DepartmentCourses> departmentCourses = FXCollections.observableArrayList();
+        String query = "SELECT courses.course_id, courses.course_name, departments.deptt_id, departments.deptt_name, department_courses.semester FROM department_courses JOIN courses JOIN departments WHERE department_courses.course_id = courses.course_id AND department_courses.deptt_id = departments.deptt_id";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            DepartmentCourses departmentCourse = new DepartmentCourses(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
+            departmentCourses.add(departmentCourse);
+        }
+        return departmentCourses;
     }
 }

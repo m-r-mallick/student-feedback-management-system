@@ -1,5 +1,6 @@
 package com.example.studentfeedbackmanagementsystem.Repository;
 
+import com.example.studentfeedbackmanagementsystem.DAO.CourseTeachers;
 import com.example.studentfeedbackmanagementsystem.DAO.StudentCourseRating;
 import com.example.studentfeedbackmanagementsystem.Entity.Course;
 import com.example.studentfeedbackmanagementsystem.Entity.Student;
@@ -24,18 +25,6 @@ public class CoursesRepository {
         System.out.println("Connected...");
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(SQLQueries.CREATE_COURSE_TABLE_QUERY);
-    }
-
-    public HashMap<String, String> getAllCourses() throws SQLException {
-        HashMap<String, String> courses = new HashMap<>();
-        String query = "SELECT course_id, course_name FROM courses";
-        Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery(query);
-        while (resultSet.next()) {
-            System.out.println(resultSet.getString("course_id") + " - " + resultSet.getString("course_name"));
-            courses.put(resultSet.getString("course_id"), resultSet.getString("course_name"));
-        }
-        return courses;
     }
 
     public boolean saveRatings(HashMap<String, Integer> ratings, Student student) {
@@ -201,30 +190,6 @@ public class CoursesRepository {
         return alert;
     }
 
-    public ObservableList<Course> getCoursesWithUB(int ubVal) throws SQLException {
-        ObservableList<Course> courses = FXCollections.observableArrayList();
-        String query = "SELECT * FROM courses WHERE course_ratings < " + ubVal;
-        Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery(query);
-        while (resultSet.next()) {
-            Course course = new Course(resultSet.getString(1), resultSet.getString(2));
-            courses.add(course);
-        }
-        return courses;
-    }
-
-    public ObservableList<Course> getCoursesWithLB(int lbVal) throws SQLException {
-        ObservableList<Course> courses = FXCollections.observableArrayList();
-        String query = "SELECT * FROM courses WHERE course_ratings >= " + lbVal;
-        Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery(query);
-        while (resultSet.next()) {
-            Course course = new Course(resultSet.getString(1), resultSet.getString(2));
-            courses.add(course);
-        }
-        return courses;
-    }
-
     public Course getCourseById(String id) throws SQLException {
         String query = "SELECT * FROM courses WHERE course_id = '" + id + "'";
         Statement stmt = conn.createStatement();
@@ -247,5 +212,17 @@ public class CoursesRepository {
             courses.put(resultSet.getString("course_id"), resultSet.getString("course_name"));
         }
         return courses;
+    }
+
+    public ObservableList<CourseTeachers> getAllCourseTeachers() throws SQLException {
+        ObservableList<CourseTeachers> courseTeachers = FXCollections.observableArrayList();
+        String query = "SELECT courses.course_id, courses.course_name, teachers.teacher_id, teachers.teacher_name FROM course_teachers JOIN teachers JOIN courses WHERE courses.course_id = course_teachers.course_id AND teachers.teacher_id = course_teachers.teacher_id";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            CourseTeachers courseTeacher = new CourseTeachers(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+            courseTeachers.add(courseTeacher);
+        }
+        return courseTeachers;
     }
 }

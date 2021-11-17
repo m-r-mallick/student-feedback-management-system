@@ -25,7 +25,7 @@
          <children>
             <FlowPane hgap="100.0" prefHeight="37.0" prefWidth="1150.0">
                <children>
-                  <ComboBox fx:id="sub1" prefHeight="37.0" prefWidth="754.0" />
+                  <ComboBox fx:id="sub1" prefHeight="37.0" prefWidth="754.0" promptText="Subject (1)" />
                   <Rating fx:id="rate1" rating="1.0">
                      <effect>
                         <ColorAdjust />
@@ -35,25 +35,25 @@
             </FlowPane>
             <FlowPane hgap="100.0" prefHeight="37.0" prefWidth="1150.0">
                <children>
-                  <ComboBox fx:id="sub2" prefHeight="37.0" prefWidth="754.0" />
+                  <ComboBox fx:id="sub2" prefHeight="37.0" prefWidth="754.0" promptText="Subject (2)" />
                   <Rating fx:id="rate2" rating="1.0" />
                </children>
             </FlowPane>
             <FlowPane hgap="100.0" prefHeight="37.0" prefWidth="1150.0">
                <children>
-                  <ComboBox fx:id="sub3" prefHeight="37.0" prefWidth="754.0" />
+                  <ComboBox fx:id="sub3" prefHeight="37.0" prefWidth="754.0" promptText="Subject (3)" />
                   <Rating fx:id="rate3" rating="1.0" />
                </children>
             </FlowPane>
             <FlowPane hgap="100.0" prefHeight="37.0" prefWidth="1150.0">
                <children>
-                  <ComboBox fx:id="sub4" prefHeight="37.0" prefWidth="754.0" />
+                  <ComboBox fx:id="sub4" prefHeight="37.0" prefWidth="754.0" promptText="Subject (4)" />
                   <Rating fx:id="rate4" rating="1.0" />
                </children>
             </FlowPane>
             <FlowPane hgap="100.0" prefHeight="37.0" prefWidth="1150.0">
                <children>
-                  <ComboBox fx:id="sub5" prefHeight="37.0" prefWidth="754.0" />
+                  <ComboBox fx:id="sub5" prefHeight="37.0" prefWidth="754.0" promptText="Subject (5)" />
                   <Rating fx:id="rate5" rating="1.0" />
                </children>
             </FlowPane>

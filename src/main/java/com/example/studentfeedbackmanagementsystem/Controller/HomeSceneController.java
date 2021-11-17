@@ -1,5 +1,7 @@
 package com.example.studentfeedbackmanagementsystem.Controller;
 
+import com.example.studentfeedbackmanagementsystem.DAO.CourseTeachers;
+import com.example.studentfeedbackmanagementsystem.DAO.DepartmentCourses;
 import com.example.studentfeedbackmanagementsystem.DAO.StudentCourseRating;
 import com.example.studentfeedbackmanagementsystem.Entity.Course;
 import com.example.studentfeedbackmanagementsystem.Entity.Department;
@@ -118,7 +120,10 @@ public class HomeSceneController {
 
         table.setItems(courses);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> miniDisplay.setText(Helpers.formattedCourse(newValue)));
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            sideBarAccordion.setExpandedPane(studentZone);
+            miniDisplay.setText(Helpers.formattedCourse(newValue));
+        });
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.getColumns().addAll(codeCol, nameCol);
         table.prefHeightProperty().bind(hsDisplay.heightProperty());
@@ -145,7 +150,10 @@ public class HomeSceneController {
 
         table.setItems(students);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> miniDisplay.setText(Helpers.formattedStudent(newValue)));
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            sideBarAccordion.setExpandedPane(studentZone);
+            miniDisplay.setText(Helpers.formattedStudent(newValue));
+        });
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.getColumns().addAll(rnoCol, nameCol, semCol);
         table.prefHeightProperty().bind(hsDisplay.heightProperty());
@@ -176,7 +184,10 @@ public class HomeSceneController {
 
         table.setItems(scrData);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> miniDisplay.setText(Helpers.formattedSCR(newValue)));
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            sideBarAccordion.setExpandedPane(studentZone);
+            miniDisplay.setText(Helpers.formattedSCR(newValue));
+        });
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.getColumns().addAll(codeCol, rnoCol, teacherCol, depttCol, ratingCol);
         table.prefHeightProperty().bind(hsDisplay.heightProperty());
@@ -283,7 +294,7 @@ public class HomeSceneController {
         stage.show();
     }
 
-    public void onViewCourseRatingsLessThanVal(ActionEvent event) {
+    public void onViewTeachersRatingsLessThanVal(ActionEvent event) {
         VBox vbox = new VBox();
         vbox.setStyle("-fx-background-color: #993333;");
         vbox.setSpacing(20);
@@ -292,29 +303,33 @@ public class HomeSceneController {
         textField.setPrefWidth(vbox.getPrefWidth());
         textField.setPromptText("Enter Rating (upper bound)");
         Button delBtn = new Button();
-        delBtn.setText("Get Courses");
+        delBtn.setText("Get Teachers");
         delBtn.setOnMouseClicked(e -> {
             hsDisplay.getChildren().clear();
             try {
                 int ubVal = Integer.parseInt(textField.getText());
-                CoursesRepository coursesRepository = new CoursesRepository();
-                TableView<Course> table = new TableView<>();
-                ObservableList<Course> courses = coursesRepository.getCoursesWithUB(ubVal);
+                TableView<Teacher> table = new TableView<>();
+                ObservableList<Teacher> teachers = new TeacherRepository().getTeachersWithUB(ubVal);
 
                 TableColumn codeCol = new TableColumn("Code");
-                codeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+                codeCol.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
                 TableColumn nameCol = new TableColumn("Name");
-                nameCol.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+                nameCol.setCellValueFactory(new PropertyValueFactory<>("teacherName"));
+                TableColumn deptCol = new TableColumn("Deptt.");
+                deptCol.setCellValueFactory(new PropertyValueFactory<>("depttId"));
                 TableColumn ratingsCol = new TableColumn("Ratings");
                 ratingsCol.setCellValueFactory(new PropertyValueFactory<>("ratings"));
                 TableColumn nofCol = new TableColumn("No. of feedbacks");
                 nofCol.setCellValueFactory(new PropertyValueFactory<>("numOfFeedbacks"));
 
-                table.setItems(courses);
+                table.setItems(teachers);
                 table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-                table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> miniDisplay.setText(Helpers.formattedCourse(newValue)));
+                table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+                    sideBarAccordion.setExpandedPane(studentZone);
+                    miniDisplay.setText(Helpers.formattedTeacher(newValue));
+                });
                 table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                table.getColumns().addAll(codeCol, nameCol, ratingsCol, nofCol);
+                table.getColumns().addAll(codeCol, nameCol, deptCol, ratingsCol, nofCol);
                 table.prefHeightProperty().bind(hsDisplay.heightProperty());
                 table.prefWidthProperty().bind(hsDisplay.widthProperty());
 
@@ -338,7 +353,7 @@ public class HomeSceneController {
         hsDisplay.getChildren().addAll(vbox);
     }
 
-    public void onViewCourseRatingsMoreThanVal(ActionEvent event) {
+    public void onViewTeachersRatingsMoreThanVal(ActionEvent event) {
         VBox vbox = new VBox();
         vbox.setStyle("-fx-background-color: #993333;");
         vbox.setSpacing(20);
@@ -347,29 +362,33 @@ public class HomeSceneController {
         textField.setPrefWidth(vbox.getPrefWidth());
         textField.setPromptText("Enter Rating (upper bound)");
         Button delBtn = new Button();
-        delBtn.setText("Get Courses");
+        delBtn.setText("Get Teachers");
         delBtn.setOnMouseClicked(e -> {
             hsDisplay.getChildren().clear();
             try {
                 int lbVal = Integer.parseInt(textField.getText());
-                CoursesRepository coursesRepository = new CoursesRepository();
-                TableView<Course> table = new TableView<>();
-                ObservableList<Course> courses = coursesRepository.getCoursesWithLB(lbVal);
+                TableView<Teacher> table = new TableView<>();
+                ObservableList<Teacher> teachers = new TeacherRepository().getTeachersWithLB(lbVal);
 
                 TableColumn codeCol = new TableColumn("Code");
-                codeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+                codeCol.setCellValueFactory(new PropertyValueFactory<>("teacherId"));
                 TableColumn nameCol = new TableColumn("Name");
-                nameCol.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+                nameCol.setCellValueFactory(new PropertyValueFactory<>("teacherName"));
+                TableColumn deptCol = new TableColumn("Deptt.");
+                deptCol.setCellValueFactory(new PropertyValueFactory<>("depttId"));
                 TableColumn ratingsCol = new TableColumn("Ratings");
                 ratingsCol.setCellValueFactory(new PropertyValueFactory<>("ratings"));
                 TableColumn nofCol = new TableColumn("No. of feedbacks");
                 nofCol.setCellValueFactory(new PropertyValueFactory<>("numOfFeedbacks"));
 
-                table.setItems(courses);
+                table.setItems(teachers);
                 table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-                table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> miniDisplay.setText(Helpers.formattedCourse(newValue)));
+                table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+                    sideBarAccordion.setExpandedPane(studentZone);
+                    miniDisplay.setText(Helpers.formattedTeacher(newValue));
+                });
                 table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-                table.getColumns().addAll(codeCol, nameCol, ratingsCol, nofCol);
+                table.getColumns().addAll(codeCol, nameCol, deptCol, ratingsCol, nofCol);
                 table.prefHeightProperty().bind(hsDisplay.heightProperty());
                 table.prefWidthProperty().bind(hsDisplay.widthProperty());
 
@@ -500,7 +519,10 @@ public class HomeSceneController {
 
         table.setItems(teachers);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> miniDisplay.setText(Helpers.formattedTeacher(newValue)));
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            sideBarAccordion.setExpandedPane(studentZone);
+            miniDisplay.setText(Helpers.formattedTeacher(newValue));
+        });
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.getColumns().addAll(idCol, nameCol, deptCol, ratingsCol, nofCol);
         table.prefHeightProperty().bind(hsDisplay.heightProperty());
@@ -525,9 +547,74 @@ public class HomeSceneController {
 
         table.setItems(departments);
         table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> miniDisplay.setText(Helpers.formattedDepartment(newValue)));
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            sideBarAccordion.setExpandedPane(studentZone);
+            miniDisplay.setText(Helpers.formattedDepartment(newValue));
+        });
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.getColumns().addAll(idCol, nameCol);
+        table.prefHeightProperty().bind(hsDisplay.heightProperty());
+        table.prefWidthProperty().bind(hsDisplay.widthProperty());
+
+        hsDisplay.getChildren().addAll(table);
+    }
+
+    public void onViewCourseTeachers(ActionEvent event) throws SQLException {
+        if (hsDisplay.getChildren().size() > 0) {
+            hsDisplay.getChildren().clear();
+        }
+        TableView<CourseTeachers> table = new TableView<>();
+        ObservableList<CourseTeachers> courseTeachers = new CoursesRepository().getAllCourseTeachers();
+
+        TableColumn cidCol = new TableColumn("Course Id");
+        cidCol.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+        TableColumn cnameCol = new TableColumn<>("Course Name");
+        cnameCol.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        TableColumn tidCol = new TableColumn<>("Teacher Id");
+        tidCol.setCellValueFactory(new PropertyValueFactory<>("courseTeacherId"));
+        TableColumn tnameCol = new TableColumn("Teacher Name");
+        tnameCol.setCellValueFactory(new PropertyValueFactory<>("courseTeacherName"));
+
+        table.setItems(courseTeachers);
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            sideBarAccordion.setExpandedPane(studentZone);
+            miniDisplay.setText(Helpers.formattedCT(newValue));
+        });
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.getColumns().addAll(cidCol, cnameCol, tidCol, tnameCol);
+        table.prefHeightProperty().bind(hsDisplay.heightProperty());
+        table.prefWidthProperty().bind(hsDisplay.widthProperty());
+
+        hsDisplay.getChildren().addAll(table);
+    }
+
+    public void onViewDepartmentsCourses(ActionEvent event) throws SQLException {
+        if (hsDisplay.getChildren().size() > 0) {
+            hsDisplay.getChildren().clear();
+        }
+        TableView<DepartmentCourses> table = new TableView<>();
+        ObservableList<DepartmentCourses> departmentCourses = new DepartmentRepository().getAllDepttCourses();
+
+        TableColumn cidCol = new TableColumn("Course Id");
+        cidCol.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+        TableColumn cnameCol = new TableColumn<>("Course Name");
+        cnameCol.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        TableColumn didCol = new TableColumn<>("Deptt. Id");
+        didCol.setCellValueFactory(new PropertyValueFactory<>("depttId"));
+        TableColumn dnameCol = new TableColumn("Department");
+        dnameCol.setCellValueFactory(new PropertyValueFactory<>("depttName"));
+        TableColumn semCol = new TableColumn("Semester");
+        semCol.setCellValueFactory(new PropertyValueFactory<>("semester"));
+
+        table.setItems(departmentCourses);
+        table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        table.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            sideBarAccordion.setExpandedPane(studentZone);
+            miniDisplay.setText(Helpers.formattedDC(newValue));
+        });
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        table.getColumns().addAll(cidCol, cnameCol, didCol, dnameCol, semCol);
         table.prefHeightProperty().bind(hsDisplay.heightProperty());
         table.prefWidthProperty().bind(hsDisplay.widthProperty());
 

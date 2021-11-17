@@ -1,9 +1,12 @@
 package com.example.studentfeedbackmanagementsystem.Repository;
 
+import com.example.studentfeedbackmanagementsystem.Entity.Course;
 import com.example.studentfeedbackmanagementsystem.Entity.Student;
 import com.example.studentfeedbackmanagementsystem.Entity.Teacher;
 import com.example.studentfeedbackmanagementsystem.Misc.Auth;
 import com.example.studentfeedbackmanagementsystem.Misc.SQLQueries;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
@@ -137,5 +140,30 @@ public class TeacherRepository {
                 e.printStackTrace();
             }
         });
+    }
+
+    public ObservableList<Teacher> getTeachersWithUB(int ubVal) throws SQLException {
+        ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+        String query = "SELECT * FROM teachers WHERE ratings < " + ubVal;
+        Statement stmt = conn.createStatement();
+        ResultSet resultSet = stmt.executeQuery(query);
+        while (resultSet.next()) {
+            Teacher teacher = new Teacher(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getInt(5));
+            teachers.add(teacher);
+        }
+        return teachers;
+    }
+
+
+    public ObservableList<Teacher> getTeachersWithLB(int ubVal) throws SQLException {
+        ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+        String query = "SELECT * FROM teachers WHERE ratings >= " + ubVal;
+        Statement stmt = conn.createStatement();
+        ResultSet resultSet = stmt.executeQuery(query);
+        while (resultSet.next()) {
+            Teacher teacher = new Teacher(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4), resultSet.getInt(5));
+            teachers.add(teacher);
+        }
+        return teachers;
     }
 }
