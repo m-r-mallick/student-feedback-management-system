@@ -115,7 +115,7 @@ public class FeedbackSceneController {
         sub3.setItems(FXCollections.observableArrayList(subs));
         sub4.setItems(FXCollections.observableArrayList(subs));
         sub5.setItems(FXCollections.observableArrayList(subs));
-        studentLabel.setText(student.toString());
+        studentLabel.setText(student.getName() + "\n" + student.getRollNo() + "\n" + student.getDepttId());
     }
 
     public boolean checkDuplicate() {
