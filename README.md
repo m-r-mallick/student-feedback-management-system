@@ -18,7 +18,8 @@ public class Auth {
     public static final String username = <insert_database_username>;
     public static final String password = <insert_database_password>;
 
-    public static final String SECRET_KEY = "JavaStillTheKing";
+    // optional - use only if you actually need to implement encryption
+    public static final String SECRET_KEY = <insert_secret_key>;
 
 }
 ```
