@@ -8,7 +8,7 @@ A student-teacher feedback management system for college/university students
 → Additional libraries - JFoenix | ControlsFX<br/>
 
 # Want to use this project?
-Add below code block to package - com/example/studentfeedbackmanagementsystem/Misc_<br/>
+Add below code block to package - com/example/studentfeedbackmanagementsystem/Misc<br/>
 ```java
 package com.example.studentfeedbackmanagementsystem.Misc;
 
